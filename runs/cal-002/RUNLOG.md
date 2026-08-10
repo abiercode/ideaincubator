@@ -18,7 +18,7 @@
 | P5 | T02 | 19,487 total (10% of session quota) | — | $0 (free tier) | (pending) | 1 | No |
 | P5 | T03 | 22,299 total (11% of session quota) | — | $0 (free tier) | incl. ~30-60min throttle wait | 1 | No |
 | P5 | T04 | 25,388 total (13% of session quota) | — | $0 (free tier) | (pending) | 1 | No |
-| P5 | T05 | (pending founder's report) | — | $0 (free tier) | (pending) | 1 | No |
+| P5 | T05 | 26,393 total (13% of session quota) | — | $0 (free tier) | (pending) | 1 | No |
 
 Stage notes:
 - P4 (2026-08-09): DoD PASSED mechanically — 12/12 ACs each claimed exactly once, dependency graph acyclic and topologically numbered, 6 required sections per task, no "and also", no implementation code smuggled. Plan quality is genuinely strong: all 5 canaries correctly planned (Decimal-from-strings + ROUND_FLOOR for C1/AC-12 float trap caught AT PLANNING TIME, payment-before-accrual C2, Z→A C3, USD format C4, exit-2/stderr C5); AC-1's 31-day arithmetic hand-verified correct in Key Decision 2.
