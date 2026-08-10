@@ -6,7 +6,7 @@
 - Tool (and version): OpenCode (fill in version)
 - Model (exact ID, provider, temperature if known): DeepSeek V4 Flash Free via OpenCode free tier (confirm exact ID shown in OpenCode before starting)
 - prompts_sha: (fill in: `git rev-parse --short HEAD`)
-- Web access available: (yes/no — check your Kilo session)
+- Web access available: YES — confirmed during P2; model declared it and made real tool calls (fetches/searches) before writing deliverables
 
 ## Stages
 
