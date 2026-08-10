@@ -32,7 +32,7 @@ Every decision that shapes this project, in one place. The decider is always the
 
 | Decision | Notes |
 |----------|-------|
-| Claim the name | smallmodelgames domain + GitHub handle — founder only (needs registrar/GitHub accounts). Do before any public mention |
+| Claim the name | **themodelgames** (decided 2026-08-09): domain (.com/.dev/.ai as available) + GitHub org name — founder only (needs registrar/GitHub accounts). Grab matching modeljobs handles in the same sitting to keep the family intact. Do before any public mention beyond this repo |
 | Which event runs first (= calibration) | The Dictation or The Accountant; single model, small scope |
 | Which cheap model to pin for experiments | Try candidates during calibration runs; record exact model ID |
 | Which tool carries pre-registered runs | Depends on whether the observer can sit under Kilo; OpenCode is the likely fallback — test when observer exists |
