@@ -35,5 +35,6 @@ Every decision that shapes this project, in one place. The decider is always the
 | Which cheap model to pin for experiments | Try candidates during calibration runs; record exact model ID |
 | Which tool carries pre-registered runs | Depends on whether the observer can sit under Kilo; OpenCode is the likely fallback — test when observer exists |
 | Observer tech stack | Chosen at P4 during EXP-000, from the allowed-stack constraint |
+| Observer vs. startingsandbox ledger | The sibling project (delegation governance layer, `~/startingsandbox`) already has a frozen event schema and a recorder in progress. Decide before EXP-000 builds anything: is the incubator's observer a client of that ledger, or a separate system? |
 | EXP-001 blanks | Task battery, per-run budget — must be committed before any EXP-001 run |
 | Brand/profile polish | Org page, profile README, pinned repos — any time before going public |
