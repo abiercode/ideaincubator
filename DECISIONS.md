@@ -24,6 +24,7 @@ Every decision that shapes this project, in one place. The decider is always the
 | 2026-08-09 | Launch events (v1) | 11-event taxonomy drafted | **The Dictation (spec fidelity w/ canaries), The Accountant (business-rule math), The Repair (fix failing tests); v1 scope = 3 events × ~5 models × 3 replicates, static results page** |
 | 2026-08-09 | Event safety rule | — | **Every event is a pure input→output utility: no auth, no encryption, no payments, no personal data** |
 | 2026-08-09 | Calibration run | Throwaway practice app · small slice of a real event | **First Games event run with a single model doubles as the calibration run** |
+| 2026-08-09 | Season 1 roster | Paid budget models (OpenCode Go's 18) · free models only | **Free models only — "The Free League" (~20 free models across OpenCode and Kilo). Paid budget roster deferred to a later season. Free-tier quirks (rate limits, model churn) are logged as findings, not failures** |
 
 ## Open (decision needed, in rough order)
 
