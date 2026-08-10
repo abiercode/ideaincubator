@@ -23,6 +23,11 @@ Research protocol to follow:
 
 Web access: {{WEB_ACCESS_AVAILABLE}}. If web access is unavailable, you may use background knowledge, but every such claim MUST be labeled `[assumed]` instead of `[verified]`.
 
+Label rules (violating these invalidates the document):
+- `[verified]` requires the exact URL you accessed IN THIS SESSION, written next to the claim. No URL, no `[verified]` — use `[assumed]`.
+- Every competitor you name must include its URL. A named product with no URL counts as an invented product.
+- Naming a plausible-sounding source from memory (a survey, a vendor, a statistic) without accessing it is fabrication, even if such a source happens to exist.
+
 ## Task
 
 Produce two files.
