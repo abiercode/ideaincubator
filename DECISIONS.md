@@ -19,13 +19,19 @@ Every decision that shapes this project, in one place. The decider is always the
 | 2026-08-09 | Repo visibility | Public now · private until there's something to show | **Private until the first experiment writeup exists; keep pushing to the private remote so GitHub independently records commit arrival times** |
 | 2026-08-09 | Idea backlog | Publish all ideas · publish only ideas that enter the pipeline | **Backlog stays private (gitignored); ideas become public at intake (P1)** |
 | 2026-08-09 | How decisions get made | AI acts and reports · founder decides everything, AI advises | **Founder is in the loop on every decision; AI presents options + recommendation and waits. No AI co-author lines in commits** |
+| 2026-08-09 | Flagship public series | Generic experiment writeups · benchmark-style model comparison with real builds | **The Small Model Games: budget models compete in real software-build events, full receipts (repo + flight-recorder log) published; no single winner — per-model profiles and coaching cards** |
+| 2026-08-09 | Series name | Cheap Model Olympics (blocked: "Olympic" is federally protected, Ted Stevens Act) · Artificial Arena (blocked: LMArena collision, reads as Artificial Analysis knockoff) · Coding Colosseum (spelling liability) · Pennyathlon · Cheapionship | **Small Model Games — zero search collisions at decision time** |
+| 2026-08-09 | Launch events (v1) | 11-event taxonomy drafted | **The Dictation (spec fidelity w/ canaries), The Accountant (business-rule math), The Repair (fix failing tests); v1 scope = 3 events × ~5 models × 3 replicates, static results page** |
+| 2026-08-09 | Event safety rule | — | **Every event is a pure input→output utility: no auth, no encryption, no payments, no personal data** |
+| 2026-08-09 | Calibration run | Throwaway practice app · small slice of a real event | **First Games event run with a single model doubles as the calibration run** |
 
 ## Open (decision needed, in rough order)
 
 | Decision | Notes |
 |----------|-------|
+| Claim the name | smallmodelgames domain + GitHub handle — founder only (needs registrar/GitHub accounts). Do before any public mention |
+| Which event runs first (= calibration) | The Dictation or The Accountant; single model, small scope |
 | Which cheap model to pin for experiments | Try candidates during calibration runs; record exact model ID |
-| Throwaway idea for the first calibration run | Deliberately disposable; 2–3 build tasks max |
 | Which tool carries pre-registered runs | Depends on whether the observer can sit under Kilo; OpenCode is the likely fallback — test when observer exists |
 | Observer tech stack | Chosen at P4 during EXP-000, from the allowed-stack constraint |
 | EXP-001 blanks | Task battery, per-run budget — must be committed before any EXP-001 run |
