@@ -8,6 +8,11 @@ Until EXP-000 delivers the automated runner, **the human operator is the runner,
 2. Pick ONE cheap model and pin it: exact model ID, provider, and (if the tool exposes it) temperature. Write it in every RUNLOG. Do not switch models mid-run, ever.
 3. Note the git SHA of this repo — that is `prompts_sha` for every run under it.
 
+## Where a run's artifacts live
+
+- **Documents** (stages P1–P4 and P6: idea card, research, spec, plan, writeup, RUNLOG) live in THIS repo, under `runs/<run_id>/`.
+- **Code** (stage P5) lives in a separate test repo — one per build, created only when P5 begins, so its git history contains nothing but the build model's own commits. Record the test repo's URL in the RUNLOG. For Small Model Games events: one repo per event, one branch per contestant model.
+
 ## Per-run setup
 
 1. Create `runs/<run_id>/` using the naming scheme `<exp>-<condition>-r<replicate>` (calibration runs use `cal-<n>`).
