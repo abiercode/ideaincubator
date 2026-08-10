@@ -33,4 +33,4 @@ The domain is resurrected from cal-001, where "late-fee calculator as a product"
 
 ## Format
 
-Events enter the pipeline at the planning stage: contestants receive `SPEC.md` (this folder) via stage contract P4, plan their build, then execute P5 build tasks in a fresh arena repo (one repo per event, one branch per contestant). The acceptance suite is authored by the operator side and is never shown to contestants during a heat; it is published with results after the heat completes.
+Events enter the pipeline at the planning stage: contestants receive `SPEC.md` (this folder) via stage contract P4, plan their build, then execute P5 build tasks in a fresh arena repo (one repo per event, one branch per contestant). The acceptance suite lives in `acceptance/` — public from the start, pre-registered and git-timestamped before any heat runs. Contestants never receive it in-session; the clean-room protocol (a contestant sees only its pasted contract) is what keeps the referee out of their context. If training-data contamination ever becomes a realistic concern, that season's suite will be held out until its heats complete.
