@@ -40,3 +40,4 @@ Every decision that shapes this project, in one place. The decider is always the
 | Observer vs. startingsandbox ledger | The sibling project (delegation governance layer, `~/startingsandbox`) already has a frozen event schema and a recorder in progress. Decide before EXP-000 builds anything: is the incubator's observer a client of that ledger, or a separate system? |
 | EXP-001 blanks | Task battery, per-run budget — must be committed before any EXP-001 run |
 | Brand/profile polish | Org page, profile README, pinned repos — any time before going public |
+| Spectator layer (PARKED, founder's call 2026-08-09) | Visualize live Games heats as a fighting/racing game — code being written on one side, visuals + test results as the "match" on the other. Evolved from the earlier "living dashboard" concept. Cross-season infrastructure: built once, used every season; NOT built by a free model. Revisit after Season 1 has real heats to visualize |
