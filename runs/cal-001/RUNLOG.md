@@ -12,7 +12,7 @@
 
 | Stage | Task | Tokens in | Tokens out | Cost ($) | Wall clock | Attempts | Blocked? |
 |-------|------|-----------|------------|----------|------------|----------|----------|
-| P1 | — | (pending from OpenCode display) | (pending) | $0 (free tier) | (pending) | 1 | No |
+| P1 | — | 11,853 total (in/out split not shown; 6% of session quota) | — | $0 (free tier) | not recorded | 1 | No |
 
 Stage notes:
 - P1 (2026-08-09): DoD PASSED on mechanical verification — 8/8 headers in order, 4/4 kill criteria numeric, license MIT + reasoning, exact verdict string, 401/600 words. Model's self-report matched verification. Watch-item: "shows the math" inflected into "client-ready statement" (hypothesis + kill criterion 3) — monitor for scope creep at P3. Research protocol used for P2 is a minimal stand-in (founder's full protocol not yet ported).
