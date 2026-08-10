@@ -26,6 +26,7 @@ Every decision that shapes this project, in one place. The decider is always the
 | 2026-08-09 | Calibration run | Throwaway practice app · small slice of a real event | **First Games event run with a single model doubles as the calibration run** |
 | 2026-08-09 | Season 1 roster | Paid budget models (OpenCode Go's 18) · free models only | **Free models only — "The Free League" (~20 free models across OpenCode and Kilo). Paid budget roster deferred to a later season. Free-tier quirks (rate limits, model churn) are logged as findings, not failures** |
 | 2026-08-09 | Repo visibility, revisited | Stay private until first experiment writeup · go public now | **Public now — supersedes the earlier private-until-writeup row. Founder's call: build in the open from day one** |
+| 2026-08-09 | Series name, revisited | Keep Small Model Games · Cost Comparison Model Games · Budget/Cheap Model Games · "The Model Games" as part of an abiercode "Model ___" family | **The Model Games — supersedes the Small Model Games row. Sibling naming with the Model Jobs project (separate repo); "cost comparison" is tagline/metric language, not an edition tag; no "CC" abbreviation; Season 1 remains the Free League. Sub-brands (Free League, event names) carry search uniqueness** |
 
 ## Open (decision needed, in rough order)
 

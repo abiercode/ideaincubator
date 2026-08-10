@@ -14,7 +14,7 @@ Three places, three jobs:
 
 - **The filing cabinet (this repo).** Contracts, RUNLOGs, decisions, and every run's documents under `runs/<run_id>/`. **The model NEVER works inside this repo** — opening an agent session here would let it read contracts, experiment designs, and answer context, contaminating the run.
 - **The workbench (an empty folder, e.g. `~/smg-workbench/<run_id>/`).** Where doc-stage sessions (P1–P4, P6) run. It is empty on purpose: the model sees nothing except the pasted contract. Copy whatever it produces back into the filing cabinet's `runs/<run_id>/`.
-- **The arena (a separate test repo).** Where build sessions (P5) run — one repo per build, created empty when P5 begins, so its git history contains nothing but the build model's own commits. Record its URL in the RUNLOG. For Small Model Games events: one repo per event, one branch per contestant model.
+- **The arena (a separate test repo).** Where build sessions (P5) run — one repo per build, created empty when P5 begins, so its git history contains nothing but the build model's own commits. Record its URL in the RUNLOG. For events of The Model Games: one repo per event, one branch per contestant model.
 
 ## Per-run setup
 
