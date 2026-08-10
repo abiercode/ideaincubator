@@ -30,12 +30,14 @@ Produce one file, `IDEA.md`, with exactly these sections in this order:
 3. `## Hypothesis` — one falsifiable sentence in the form: *"[user] will [action] because [reason]."* It must be possible to be wrong about it.
 4. `## Kill Criteria` — at least 3 criteria. Each must contain a number and a threshold (e.g. "fewer than 5 of 15 interviewed users report doing X manually today"). A criterion without a measurable threshold is invalid.
 5. `## Monetization Guess` — one plausible path. Label it GUESS. Do not research it.
-6. `## Constraint Check` — a table with one row per constraint from the config above, each marked PASS or FAIL with a one-line reason.
-7. `## Intake Verdict` — exactly one line: `INTAKE: ACCEPTED` (all constraints PASS) or `INTAKE: REJECTED` (any FAIL).
+6. `## License` — exactly `MIT` or `AGPL-3.0`, plus one line of reasoning. Default is MIT. Choose AGPL-3.0 only if the product is a hostable service that others could realistically run commercially against a future paid version.
+7. `## Constraint Check` — a table with one row per constraint from the config above, each marked PASS or FAIL with a one-line reason.
+8. `## Intake Verdict` — exactly one line: `INTAKE: ACCEPTED` (all constraints PASS) or `INTAKE: REJECTED` (any FAIL).
 
 ## Definition of done (machine-checked)
 
-- `IDEA.md` exists and contains all 7 section headers above, in order.
+- `IDEA.md` exists and contains all 8 section headers above, in order.
+- `## License` names exactly one of: MIT, AGPL-3.0.
 - Every kill criterion contains at least one digit.
 - `## Intake Verdict` contains exactly one of the two verdict strings.
 - Total length ≤ 600 words.
