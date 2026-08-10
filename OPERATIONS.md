@@ -8,10 +8,13 @@ Until EXP-000 delivers the automated runner, **the human operator is the runner,
 2. Pick ONE cheap model and pin it: exact model ID, provider, and (if the tool exposes it) temperature. Write it in every RUNLOG. Do not switch models mid-run, ever.
 3. Note the git SHA of this repo — that is `prompts_sha` for every run under it.
 
-## Where a run's artifacts live
+## Where a run's artifacts live — and where the model works
 
-- **Documents** (stages P1–P4 and P6: idea card, research, spec, plan, writeup, RUNLOG) live in THIS repo, under `runs/<run_id>/`.
-- **Code** (stage P5) lives in a separate test repo — one per build, created only when P5 begins, so its git history contains nothing but the build model's own commits. Record the test repo's URL in the RUNLOG. For Small Model Games events: one repo per event, one branch per contestant model.
+Three places, three jobs:
+
+- **The filing cabinet (this repo).** Contracts, RUNLOGs, decisions, and every run's documents under `runs/<run_id>/`. **The model NEVER works inside this repo** — opening an agent session here would let it read contracts, experiment designs, and answer context, contaminating the run.
+- **The workbench (an empty folder, e.g. `~/smg-workbench/<run_id>/`).** Where doc-stage sessions (P1–P4, P6) run. It is empty on purpose: the model sees nothing except the pasted contract. Copy whatever it produces back into the filing cabinet's `runs/<run_id>/`.
+- **The arena (a separate test repo).** Where build sessions (P5) run — one repo per build, created empty when P5 begins, so its git history contains nothing but the build model's own commits. Record its URL in the RUNLOG. For Small Model Games events: one repo per event, one branch per contestant model.
 
 ## Per-run setup
 
