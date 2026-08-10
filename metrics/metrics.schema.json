@@ -1,0 +1,173 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/OWNER/ideaincubator/metrics/metrics.schema.json",
+  "title": "Incubator run metrics",
+  "description": "One metrics.json per run. Every experiment deposits into this same shape so all runs accumulate into one dataset. The runner writes this file; models never do.",
+  "type": "object",
+  "required": ["schema_version", "run_id", "experiment_id", "condition", "model", "prompts_sha", "stages", "interventions", "totals", "outcome", "code"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "run_id": {
+      "type": "string",
+      "description": "Unique per run, e.g. exp001-c2-r3 (experiment, condition, replicate)."
+    },
+    "experiment_id": {
+      "type": "string",
+      "description": "e.g. EXP-000, EXP-001."
+    },
+    "replicate": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Which repetition of this condition this run is (n=1 is an anecdote; report all replicates)."
+    },
+    "condition": {
+      "type": "object",
+      "description": "The experimental cell this run belongs to.",
+      "required": ["authorship", "granularity", "context"],
+      "additionalProperties": false,
+      "properties": {
+        "authorship": {
+          "enum": ["human_frontier", "self_authored", "none"],
+          "description": "Who wrote the planning documents. 'none' = goal-only runs with no documents."
+        },
+        "granularity": {
+          "enum": ["goal_only", "monolith", "phased", "blown_out"],
+          "description": "Document decomposition depth given to the builder."
+        },
+        "context": {
+          "enum": ["continuous", "fresh_per_task"],
+          "description": "Session handling: one long session vs. fresh context per task. Separated from granularity to control the context-hygiene confound."
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "required": ["id", "provider"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "provider": { "type": "string" },
+        "temperature": { "type": "number" },
+        "adapter_version": {
+          "type": "string",
+          "description": "Version of the per-model prompt adapter, if any."
+        }
+      }
+    },
+    "prompts_sha": {
+      "type": "string",
+      "description": "Git SHA of this repo at run time — pins the exact stage contracts used.",
+      "pattern": "^[0-9a-f]{7,40}$"
+    },
+    "started_at": { "type": "string", "format": "date-time" },
+    "finished_at": { "type": "string", "format": "date-time" },
+    "stages": {
+      "type": "array",
+      "description": "One entry per pipeline stage executed. BUILD appears once per task.",
+      "items": {
+        "type": "object",
+        "required": ["stage", "tokens_in", "tokens_out", "cost_usd", "api_calls", "retries", "blocked", "wall_clock_s"],
+        "additionalProperties": false,
+        "properties": {
+          "stage": {
+            "enum": ["P1_intake", "P2_research", "P3_spec", "P4_plan", "P5_build", "P6_postmortem"]
+          },
+          "task_id": {
+            "type": "string",
+            "description": "Present only for P5_build entries, e.g. T03."
+          },
+          "tokens_in": { "type": "integer", "minimum": 0 },
+          "tokens_out": { "type": "integer", "minimum": 0 },
+          "cost_usd": { "type": "number", "minimum": 0 },
+          "api_calls": { "type": "integer", "minimum": 0 },
+          "retries": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Failed Done Check attempts before success or block (max 3 by contract)."
+          },
+          "blocked": {
+            "type": "boolean",
+            "description": "True if the stage ended by writing a BLOCKED file."
+          },
+          "wall_clock_s": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "interventions": {
+      "type": "array",
+      "description": "Every human touch, no exceptions. Empty array = pure run. In pre-registered pure conditions any entry here voids the run (recorded as outcome 'failed').",
+      "items": {
+        "type": "object",
+        "required": ["stage", "level", "minutes", "note"],
+        "additionalProperties": false,
+        "properties": {
+          "stage": { "type": "string" },
+          "task_id": { "type": "string" },
+          "level": {
+            "enum": ["L1", "L2", "L3"],
+            "description": "L1 = unblocked (answered a question, supplied missing input). L2 = corrected (redirected a wrong approach). L3 = took over (edited code/docs by hand)."
+          },
+          "minutes": { "type": "number", "minimum": 0 },
+          "note": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" }
+        }
+      }
+    },
+    "totals": {
+      "type": "object",
+      "required": ["cost_usd", "tokens_in", "tokens_out", "wall_clock_s", "human_minutes"],
+      "additionalProperties": false,
+      "properties": {
+        "cost_usd": { "type": "number", "minimum": 0 },
+        "tokens_in": { "type": "integer", "minimum": 0 },
+        "tokens_out": { "type": "integer", "minimum": 0 },
+        "wall_clock_s": { "type": "number", "minimum": 0 },
+        "human_minutes": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Headline metric, not a footnote. Sum of intervention minutes plus setup/review time."
+        }
+      }
+    },
+    "outcome": {
+      "type": "object",
+      "required": ["status", "acs_total", "acs_passed", "tests_total", "tests_passed"],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "enum": ["shipped", "killed", "blocked", "failed"],
+          "description": "shipped = all ACs pass. killed = stopped by a kill criterion (a success of the process). blocked = model stopped per contract. failed = run voided (rule violation, intervention in a pure condition, harness error)."
+        },
+        "acs_total": { "type": "integer", "minimum": 0 },
+        "acs_passed": { "type": "integer", "minimum": 0 },
+        "tests_total": { "type": "integer", "minimum": 0 },
+        "tests_passed": { "type": "integer", "minimum": 0 },
+        "quality_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "description": "Rubric score from the blinded frontier judge, if this run was judged."
+        },
+        "kill_criterion": {
+          "type": "string",
+          "description": "Which criterion fired, when status is killed."
+        }
+      }
+    },
+    "code": {
+      "type": "object",
+      "required": ["commits", "files", "loc_added", "loc_deleted"],
+      "additionalProperties": false,
+      "properties": {
+        "commits": { "type": "integer", "minimum": 0 },
+        "files": { "type": "integer", "minimum": 0 },
+        "loc_added": { "type": "integer", "minimum": 0 },
+        "loc_deleted": { "type": "integer", "minimum": 0 },
+        "tasks_total": { "type": "integer", "minimum": 0 },
+        "tasks_completed": { "type": "integer", "minimum": 0 },
+        "tasks_blocked": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+# Secrets — never committed, no exceptions
+.env
+.env.*
+*.key
+*.pem
+credentials*
+secrets*
+
+# OS noise
+.DS_Store
+
+# Dependency/build dirs (for when the observer/runner get built)
+node_modules/
+__pycache__/
+dist/
+build/
+
+# Private idea backlog (ideas become public when they enter the pipeline, not before)
+BACKLOG.md
+backlog/

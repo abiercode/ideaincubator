@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/OWNER/ideaincubator/observer/events.schema.json",
+  "title": "Observer event",
+  "description": "One JSON object per line in runs/<run_id>/events.jsonl. Append-only; events are never edited or deleted (redaction rewrites blobs, then appends a redaction event). metrics.json is derived from these events by `observe rollup` — never written by hand.",
+  "type": "object",
+  "required": ["ts", "run_id", "type"],
+  "properties": {
+    "ts": { "type": "string", "format": "date-time" },
+    "run_id": { "type": "string" },
+    "stage": {
+      "enum": ["P1_intake", "P2_research", "P3_spec", "P4_plan", "P5_build", "P6_postmortem", "harness"],
+      "description": "Set from the active `observe start` context. 'harness' covers setup/teardown activity outside any pipeline stage."
+    },
+    "task_id": { "type": "string", "description": "Present when stage is P5_build." },
+    "type": {
+      "enum": ["run_start", "run_end", "model_call", "test_run", "commit", "block", "intervention", "redaction"]
+    }
+  },
+  "oneOf": [
+    {
+      "properties": {
+        "type": { "const": "run_start" },
+        "experiment_id": { "type": "string" },
+        "condition": { "type": "object" },
+        "model": { "type": "object" },
+        "prompts_sha": { "type": "string" }
+      },
+      "required": ["type", "experiment_id"]
+    },
+    {
+      "properties": {
+        "type": { "const": "run_end" },
+        "status": { "enum": ["shipped", "killed", "blocked", "failed"] }
+      },
+      "required": ["type", "status"]
+    },
+    {
+      "properties": {
+        "type": { "const": "model_call" },
+        "provider": { "type": "string" },
+        "model": { "type": "string" },
+        "request_ref": { "type": "string", "description": "Content hash of the full request blob in blobs/." },
+        "response_ref": { "type": "string", "description": "Content hash of the full response blob in blobs/." },
+        "tokens_in": { "type": "integer", "minimum": 0 },
+        "tokens_out": { "type": "integer", "minimum": 0 },
+        "cost_usd": { "type": "number", "minimum": 0 },
+        "pricing_version": { "type": "string", "description": "Version of the pricing table used at log time. Costs are never recomputed later." },
+        "latency_ms": { "type": "number", "minimum": 0 },
+        "status_code": { "type": "integer" },
+        "streamed": { "type": "boolean" },
+        "error": { "type": "string" }
+      },
+      "required": ["type", "provider", "model", "request_ref", "response_ref", "tokens_in", "tokens_out", "cost_usd", "pricing_version", "latency_ms", "status_code"]
+    },
+    {
+      "properties": {
+        "type": { "const": "test_run" },
+        "command": { "type": "string" },
+        "exit_code": { "type": "integer" },
+        "tests_passed": { "type": "integer", "minimum": 0 },
+        "tests_failed": { "type": "integer", "minimum": 0 },
+        "attempt": { "type": "integer", "minimum": 1, "description": "Which Done Check attempt this was (contract P5 allows 3)." }
+      },
+      "required": ["type", "command", "exit_code"]
+    },
+    {
+      "properties": {
+        "type": { "const": "commit" },
+        "sha": { "type": "string" },
+        "message": { "type": "string" },
+        "files_changed": { "type": "integer", "minimum": 0 },
+        "loc_added": { "type": "integer", "minimum": 0 },
+        "loc_deleted": { "type": "integer", "minimum": 0 }
+      },
+      "required": ["type", "sha", "message"]
+    },
+    {
+      "properties": {
+        "type": { "const": "block" },
+        "file": { "type": "string", "description": "Path of the BLOCKED-*.md the model wrote." }
+      },
+      "required": ["type", "file"]
+    },
+    {
+      "properties": {
+        "type": { "const": "intervention" },
+        "level": {
+          "enum": ["L1", "L2", "L3"],
+          "description": "L1 unblocked (answered/supplied input), L2 corrected (redirected approach), L3 took over (edited by hand). Same ladder as metrics.schema.json."
+        },
+        "minutes": { "type": "number", "minimum": 0 },
+        "note": { "type": "string" }
+      },
+      "required": ["type", "level", "minutes", "note"]
+    },
+    {
+      "properties": {
+        "type": { "const": "redaction" },
+        "blob_ref": { "type": "string" },
+        "pattern": { "type": "string", "description": "Name of the secret pattern that matched, not the secret itself." }
+      },
+      "required": ["type", "blob_ref", "pattern"]
+    }
+  ]
+}
